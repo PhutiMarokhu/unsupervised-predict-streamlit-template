@@ -62,14 +62,11 @@ movies_data = movies = pd.read_csv('resources/data/movies_df.csv', sep = ',',del
 genome_data = pd.read_csv('resources/data/genome_scores_df.csv', sep = ',',delimiter=',')
 genome_tags_data = pd.read_csv('resources/data/genome_tags_df.csv', sep = ',',delimiter=',')
 links_data = pd.read_csv('resources/data/links_df.csv', sep = ',',delimiter=',')
-#train_data = pd.read_csv('resources/data/train_df.csv', sep = ',',delimiter=',')
+train_data = pd.read_csv('resources/data/train_df.csv', sep = ',',delimiter=',')
 test_data = pd.read_csv('resources/data/test_df.csv', sep = ',',delimiter=',')
 imdb_data = pd.read_csv('resources/data/imdb_df.csv', sep = ',',delimiter=',')
 tags_data = pd.read_csv('resources/data/tags_df.csv', sep = ',',delimiter=',')
 
-train_data_link='https://drive.google.com/file/d/11Gs_0v_JrqLay1TXisydeKhh0x5D0_wy/view?usp=sharing"'
-train_data_download='https://drive.google.com/uc?id=' + train_data_link.split('/')[-2]
-train_data = pd.read_csv(train_data_download)
 # App declaration
 def main():
 
@@ -94,9 +91,9 @@ def main():
 
         # User-based preferences
         st.write('### Enter Your Three Favorite Movies')
-        movie_1 = st.selectbox('First Option',title_list[:])
-        movie_2 = st.selectbox('Second Option',title_list[:])
-        movie_3 = st.selectbox('Third Option',title_list[:])
+        movie_1 = st.selectbox('Fisrt Option',title_list[14930:15200])
+        movie_2 = st.selectbox('Second Option',title_list[25055:25255])
+        movie_3 = st.selectbox('Third Option',title_list[21100:21200])
         fav_movies = [movie_1,movie_2,movie_3]
 
         # Perform top-10 movie recommendation generation
@@ -174,7 +171,6 @@ def main():
         sum() methods to see if each columns contains null values""")
         st.dataframe(train_data.head(counter))
         st.markdown(f"[Get train data]({train_link})")
-        st.info(train_data.shape)
         
         st.write("*6. Test Dataset*  \n ")
         st.text("""Observation: \n\t •Contains no null values \n\t •Has 5000019 rows and 2 columns \n\t 
@@ -206,8 +202,22 @@ def main():
         \nChoosing the right data types for your tables, stored procedures, and variables not 
         only improves performance by ensuring a correct execution plan, but it also improves 
         data integrity by ensuring that the correct data is stored within a database.""")
+        st.write("""Movies Data Set: movieId --> uint32
+
+IMDB Data Set: movieId --> uint32 | runtime --> float16
+
+Train Data Set: userId --> uint32 | movieId --> uint32 | rating --> float16 | timestamp --> uint32
+
+Test Data Set: userId --> uint32 | movieId --> uint32
+
+Links Data Set: movieId --> uint | imdbId --> uint32 | tmdbId --> will be removed \n""")
         st.image("resources/imgs/Memory usage.png", caption = "Memory(GB) saved by choosing the correct data type",
-        use_column_width=True)
+            use_column_width=True)
+        st.markdown("""Just by correctly assigning the data types, we have free up over 200Mb of storage 
+        which is a lot of space, especially for a dataset this small incomparison to those of major tech company's 
+        which are likely in the terabytes. And in a profit sensitive market like this one, storage estate is at a 
+        premium.""")
+        
 
 
     if page_selection == "EDA":
@@ -234,20 +244,55 @@ def main():
         lot of movies which are added/published without any genre being
          """)
 
+        st.header("Rating Distribution")
         st.image("resources/imgs/Ratings distri.png")
+        st.write("""We will be looking at how ratings are distributed in df_train DataFrame.
+        26.5% of all ratings is 4 which is the majority.
+        The distribution shows a skewness in the positive direction""")
 
+        st.header("Number of Ratings Per Year ")
         st.image("resources/imgs/Number of Ratings per year.png")
+        st.write("""Knowing that there are so many users, we just can't look at them all .Therefore we will visualise the first 50 users and the total amount of rating for each of them 
+        It appears that there are users who have rated only a few movies, 
+        this implies that not all users are equivalent to suggest movie recommendations to other users.
+        This is only one perspective, we could also view it as movies that only received one or very few ratings. This can be caused by a lack of popularity or received a bad rating by the first user then became overlooked by other users.Based on the distribution above, it seems that there are users with next to nothing ratings. This is an indication that there are users whose ratings could not contribute to recommending movies.    
+              """)
         
+        st.header("Number of ratings per user")
         st.image("resources/imgs/Number of ratings per user.png")
-        
-        st.image("resources/imgs/Top 10 Most Average Rated Movies.png")
-        
-        st.image("resources/imgs/Top 10 movies ratings.png")
-        
-        st.image("resources/imgs/Top 10 Most Average Rated Movies.png")
-        
-        st.markdown('Some info here soon')
+        st.write(""" We will be looking at the top 10 movies with the most total ratings (this is only the total number of ratings given, not the average ratings)
+        The movie with the most ratings is Shawshank Redemption,
+        The (1994), the movie is about a banker who is convicted for the murder of his wife and her lover and is sentenced to two consecutive life sentences at the Shawshank State Prison.
+        This movie is based on Rita Hayworth and Shawshank Redemption by Stephen King and it is claimed to be amongs the best movies ever made in World Cinema and applauded by many film critics.
+        Forrest Gump (1994) is about a man with a low IQ, recounts the early years of his life when he found himself in the middle of key historical events. This movie has been voted the greatest film character of all time, 
+        beating James Bond and Scarlett O'Hara in the process.
+        The most ratings received were movies from the 1990s and one from the 1970s, 
+        where Shawshank Redmeption, The (1994) got the most ratings followed by Forrest Gump (1994).""")
 
+        st.header("Top 10 Most Average Rated Movies")
+        st.image("resources/imgs/Top 10 Most Average Rated Movies.png")
+        st.write(""" We will be looking at the top 10 movies with the most average rating.
+        Planet Earth II is a British nature documentary series produced by the BBC as a sequel to Planet Earth. 
+        Cosmos is an American science documentary television series
+        Planet Earth II (2016) has the highest average ratings followed by Planet Earth (2006)  """)
+        
+        st.header("Top 10 movies ratings ")
+        st.image("resources/imgs/Top 10 movies ratings.png")
+        st.write("""We will be looking at the total number of ratings per year.
+        Note: This is for the total ratings ever made each year.
+        The graph above depicts the ratings for this dataset by year (averaged year per user).
+        It demonstrated that certain consumers have preferences for release years,
+        which could be relevant for undertaking predictive modeling.We can observe that all ratings were made between 1995 and 2020, with no evident association between year and quantity of ratings created/collected within that time frame.
+        The most ratings were received in the year 2016 with a total of 702 962.
+        As we can see that the year 1998 received the least count of ratings with a total of 108 811.
+         After 2014, the count of rating increased tremendously and started declining after 2016.""")
+
+        st.header("Top 10 most Average Rated Movies")
+        st.image("resources/imgs/Top 10 Most Average Rated Movies.png")
+        st.write(""" We will be looking at the top 10 movies with the most average rating.
+        Planet Earth II is a British nature documentary series produced by the BBC as a sequel to Planet Earth. 
+        Cosmos is an American science documentary television series
+        Planet Earth II (2016) has the highest average ratings followed by Planet Earth (2006)  """)
 
     if page_selection == "Model Performance":
         st.title("Empty for now")
@@ -256,7 +301,7 @@ def main():
 
     if page_selection == "Solution Overview":
         st.title("Solution Overview")
-        st.write("Describe your winning approach on this page")
+        st.write("")
 
     # You may want to add more sections here for aspects such as an EDA,
     # or to provide your business pitch.
