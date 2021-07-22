@@ -58,13 +58,8 @@ def collab_model(movie_list,top_n=10):
 
     """
 
-    train_sample = pd.merge(movies_df[['movieId', 'title']], ratings_df[['userId', 'movieId', 'rating']])
-    min_movie_ratings = 100
-    filter_movies = train_sample['movieId'].value_counts() > min_movie_ratings
-    filter_movies = filter_movies[filter_movies].index.tolist()
-
-    train_sample = train_sample[(train_sample['movieId'].isin(filter_movies))]
-    train_sample = train_sample[:4000000]
+    train_sample = ratings_df.merge(movies_df[['movieId', 'title']], on = 'movieId', how = 'left')
+ 
     train_pivot = train_sample.pivot_table(index = ['userId'], columns = ['title'], values = 'rating')
     
     
@@ -73,12 +68,12 @@ def collab_model(movie_list,top_n=10):
     ratings_2 = train_pivot[movie_list[1]]
     ratings_3 = train_pivot[movie_list[2]]
 
-    similar_movies_1 = train_pivot.corrwith(ratings_1).dropna().sort_values(ascending = False)[1:11]
-    similar_movies_2 = train_pivot.corrwith(ratings_2).dropna().sort_values(ascending = False)[1:11]
-    similar_movies_3 = train_pivot.corrwith(ratings_3).dropna().sort_values(ascending = False)[1:11]
+    similar_movies_1 = train_pivot.corrwith(ratings_1).dropna().drop(movie_list[0]).sort_values(ascending = False)[2:11]
+    similar_movies_2 = train_pivot.corrwith(ratings_2).dropna().drop(movie_list[1]).sort_values(ascending = False)[2:11]
+    similar_movies_3 = train_pivot.corrwith(ratings_3).dropna().drop(movie_list[2]).sort_values(ascending = False)[2:11]
 
     listings = similar_movies_1.append(similar_movies_2).append(similar_movies_3)
     listings = listings.sort_values(ascending = False)[:top_n]
     
     
-    return list(listings.index)
+    return pd.Series(listings.index)
