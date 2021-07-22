@@ -313,7 +313,20 @@ the best performance of 0.81706. After going through the 8 datasets, we ended up
 Genome_tags as well as we felt these did not add much value, aslo because in the ended we had not used them. \n
 Recommenders are big business. From Amazon's online MegaStore, as it is estimated that about 25% of the purchases 
 made on Amazon is due to ML item recommenders. Also Neflix and streaming gaint Youtube, even Google and other 
-search engines. Getting new users and keeping them on your platform has become the new gold rush. \n """)
+search engines. Getting new users and keeping them on your platform has become the new gold rush. """)
+
+        st.write("""\nThe most common method for recommendation systems are Content Filtering and Collaborating Filtering. \nContent-based 
+filtering does not deal with whcih users/viewers are watching which movies, but rather they deal with finding the next best 
+item(movie) that is most similar to the one that is has already been watched. Collaborating filtering on the other hand aims 
+to get a little bit of information about the user and then try to give the best recommendation based on the assumption that 
+people(clinets) are not completly different. But that there are a lot of similarities and overlaps of character and preferences, 
+thus relying on past user and item datasets, which can clearly result in a problem if there is no data on the user, i.e. Cold 
+start problem. This is why big tech companies use a hybrid-recommender which solves this issue with the assumption that the new 
+user is likely to want a movies that are most popular at that time and in that general area. Lucky for us, we don't need to deal 
+with this yet. \n
+For our content based we used SVD and sklearn's cosine-similarity, sorting the returned list by a ranking or a score if you would 
+of similarities among movies. """
+)
 
         st.image('resources/imgs/Global_Recommendation.jpeg', caption = """Global 
         Recommendation Engine 2020-2024(src : https://mms.businesswire.com/)""",use_column_width=True)
