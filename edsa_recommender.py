@@ -217,7 +217,13 @@ Links Data Set: movieId --> uint | imdbId --> uint32 | tmdbId --> will be remove
         st.markdown("""Just by correctly assigning the data types, we have free up over 200Mb of storage 
         which is a lot of space, especially for a dataset this small incomparison to those of major tech company's 
         which are likely in the terabytes. And in a profit sensitive market like this one, storage estate is at a 
-        premium.""")
+        premium. The combined memory usage has been reduced by approximately 221MB. This will make the transfer of 
+        data much faster and will reduce the amount of resources needed to process the data.
+
+        \n\nIf the data frames are merged then it will increase the memory usage because of the increase in dimensions/columns.
+        To avoid increasing the amount of resources being used, remove variables that you are no longer using by using del 
+        <variable_name>. For example, if you merge the data frames and store it in a new variable then there is no need to 
+        keep the individual data frame variables""")
         
 
 
