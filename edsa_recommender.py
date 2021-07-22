@@ -302,20 +302,25 @@ Links Data Set: movieId --> uint | imdbId --> uint32 | tmdbId --> will be remove
 
     if page_selection == "Solution Overview":
         st.title("Solution Overview")
-        st.write(""""We trained our data on several models, of which KNNwithmeans and SVD gave us the best RMSE. With SVD giving us 
+        st.write("""We trained our data on several models, of which KNNwithmeans and SVD gave us the best RMSE. With SVD giving us 
 the best performance of 0.81706. After going through the 8 datasets, we ended up scraping Genome_tag_scores, 
 Genome_tags as well as we felt these did not add much value, aslo because in the ended we had not used them. \n
-Recommenders are big business. From Amazons online MegaStore as it is estimated that about 25% of the purchases 
-made on Amazon is due to ML recommenders. Also Neflix and streaming gaint Youtube, even Google and other 
-search engines. Getting new sers, keeping them on your platform has become the new gold rush. \n """)
+Recommenders are big business. From Amazon's online MegaStore, as it is estimated that about 25% of the purchases 
+made on Amazon is due to ML item recommenders. Also Neflix and streaming gaint Youtube, even Google and other 
+search engines. Getting new users and keeping them on your platform has become the new gold rush. \n """)
 
         st.image('resources/imgs/Global_Recommendation.jpeg', caption = """Global 
         Recommendation Engine 2020-2024(src : https://mms.businesswire.com/)""",use_column_width=True)
-        st.write("""Recommendation engines easy to build, to put together that almost any business,
-        even Small to Medium Enterprises (SME) as well as governments and even animal breeders 
-        can take advantage of these. From choosing which products to expand the business to, deciding on prosopective
-         employees for easier team cohesioin as well as recommending dog breeds to clients according to the type of 
-         pet, behaviors and activity levels.
+        st.write("""Recommendation engines are easy to build, to put together so much so that almost any business,
+        can add them to their arsenal of tools to capture market share. Even Small to Medium Enterprises(SMEs) 
+        as well as governments and even animal breeders can take advantage of systems like these. Be it deciding 
+        which products to expand the business to, or deciding on prosopective employees for easier team cohesioin 
+        as well as recommending dog breeds/types to clients according to the type of pet, behaviors and activity 
+        levels of the pet the client would like. 
+        \nThe early 1900s, with the rise of Ford motors' warehouse manufacturing, 
+        the age of mass production was born. Then as the world was becoming richer and more and more peolple could 
+        afford cars, the age of design and customisation began. Now we living through the contructions of the a new 
+        age. The age of personalisation, where every client gets to experience tailor made services.
 
          \nAs we have indicated, there is an endless universe of what can be accomplished with a couple of lines of 
          code and a little bit of time collecting data. Because as we all know, knowledge is **power**.""")
