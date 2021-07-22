@@ -72,7 +72,7 @@ def main():
 
     # DO NOT REMOVE the 'Recommender System' option below, however,
     # you are welcome to add more options to enrich your app.
-    page_options = ["Recommender System","Collected Data","Preprocessing methods", "EDA", "Model Performance", "Solution Overview"]
+    page_options = ["Recommender System","Collected Data","Preprocessing methods", "EDA", "Solution Overview"]
 
     # -------------------------------------------------------------------
     # ----------- !! THIS CODE MUST NOT BE ALTERED !! -------------------
@@ -121,6 +121,7 @@ def main():
                     st.title("We think you'll like:")
                     for i,j in enumerate(top_recommendations):
                         st.subheader(str(i+1)+'. '+j)
+                        
                 except:
                     st.error("Oops! Looks like this algorithm does't work.\
                               We'll need to fix it!")
@@ -212,7 +213,7 @@ Test Data Set: userId --> uint32 | movieId --> uint32
 
 Links Data Set: movieId --> uint | imdbId --> uint32 | tmdbId --> will be removed \n""")
         st.image("resources/imgs/Memory usage.png", caption = "Memory(GB) saved by choosing the correct data type",
-            use_column_width=True)
+            use_column_width=True )
         st.markdown("""Just by correctly assigning the data types, we have free up over 200Mb of storage 
         which is a lot of space, especially for a dataset this small incomparison to those of major tech company's 
         which are likely in the terabytes. And in a profit sensitive market like this one, storage estate is at a 
@@ -296,12 +297,28 @@ Links Data Set: movieId --> uint | imdbId --> uint32 | tmdbId --> will be remove
 
     if page_selection == "Model Performance":
         st.title("Empty for now")
-        st.markdown('Some info here soon')
+        st.markdown("Some info here soon")
 
 
     if page_selection == "Solution Overview":
         st.title("Solution Overview")
-        st.write("")
+        st.write(""""We trained our data on several models, of which KNNwithmeans and SVD gave us the best RMSE. With SVD giving us 
+the best performance of 0.81706. After going through the 8 datasets, we ended up scraping Genome_tag_scores, 
+Genome_tags as well as we felt these did not add much value, aslo because in the ended we had not used them. \n
+Recommenders are big business. From Amazons online MegaStore as it is estimated that about 25% of the purchases 
+made on Amazon is due to ML recommenders. Also Neflix and streaming gaint Youtube, even Google and other 
+search engines. Getting new sers, keeping them on your platform has become the new gold rush. \n """)
+
+        st.image('resources/imgs/Global_Recommendation.jpeg', caption = """Global 
+        Recommendation Engine 2020-2024(src : https://mms.businesswire.com/)""",use_column_width=True)
+        st.write("""Recommendation engines easy to build, to put together that almost any business,
+        even Small to Medium Enterprises (SME) as well as governments and even animal breeders 
+        can take advantage of these. From choosing which products to expand the business to, deciding on prosopective
+         employees for easier team cohesioin as well as recommending dog breeds to clients according to the type of 
+         pet, behaviors and activity levels.
+
+         \nAs we have indicated, there is an endless universe of what can be accomplished with a couple of lines of 
+         code and a little bit of time collecting data. Because as we all know, knowledge is **power**.""")
 
     # You may want to add more sections here for aspects such as an EDA,
     # or to provide your business pitch.
@@ -309,3 +326,6 @@ Links Data Set: movieId --> uint | imdbId --> uint32 | tmdbId --> will be remove
 
 if __name__ == '__main__':
     main()
+
+
+
